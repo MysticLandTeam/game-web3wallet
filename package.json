@@ -2,7 +2,6 @@
   "name": "game-web3wallet",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "main": "index.html",
   "homepage": "https://mysticlandteam.github.io/game-web3wallet",
   "scripts": {
