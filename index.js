@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", loadApp());
 
 async function loadApp() {
   provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   signer = provider.getSigner();
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   if (!signer) window.location.reload();
   await provider.send("eth_requestAccounts", []);
   processAction();
@@ -77,15 +79,9 @@ async function signMessage(message) {
   try {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const signature = await signer.signMessage(message);
-	
 	const expectedAddress = await signer.getAddress()
-    const actualAddress = utils.verifyMessage(message, signature)
-
-    console.log("EXPECTED ADDR: ", expectedAddress)
-    console.log("ACTUAL ADDR:   ", actualAddress)
-    console.log()
 	
-    displayResponse("Signature complete.<br><br>Copy to clipboard then continue to App", signature);
+    displayResponse("Signature complete.<br><br>Copy to clipboard then continue to App", expectedAddress);
   } catch (error) {
     copyToClipboard("error");
     displayResponse("Signature Denied");
