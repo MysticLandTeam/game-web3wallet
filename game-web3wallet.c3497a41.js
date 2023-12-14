@@ -30514,31 +30514,9 @@ async function signMessage(message) {
     await new Promise(resolve => setTimeout(resolve, 1000));
     const signature = await signer.signMessage(message);
     const expectedAddress = await signer.getAddress();
-    const expectedPublicKey = signer.signingKey.publicKey;
-    console.log("ISSUING SIGNATURE");
-    console.log("ADDR:    ", expectedAddress);
-    console.log("PUB K:   ", expectedPublicKey);
-    console.log("SIG      ", signature);
-    console.log(); // Approach 1
-
     const actualAddress = utils.verifyMessage(message, signature);
-    console.log("APPROACH 1");
     console.log("EXPECTED ADDR: ", expectedAddress);
     console.log("ACTUAL ADDR:   ", actualAddress);
-    console.log(); // Approach 2
-
-    const msgHash = utils.hashMessage(message);
-    const msgHashBytes = utils.arrayify(msgHash); // Now you have the digest,
-
-    const recoveredPubKey = utils.recoverPublicKey(msgHashBytes, signature);
-    const recoveredAddress = utils.recoverAddress(msgHashBytes, signature);
-    const matches = expectedPublicKey === recoveredPubKey;
-    console.log("APPROACH 2");
-    console.log("EXPECTED ADDR:    ", expectedAddress);
-    console.log("RECOVERED ADDR:   ", recoveredAddress);
-    console.log("EXPECTED PUB K:   ", expectedPublicKey);
-    console.log("RECOVERED PUB K:  ", recoveredPubKey);
-    console.log("SIGNATURE VALID:  ", matches);
     console.log();
     displayResponse("Signature complete.<br><br>Copy to clipboard then continue to App", signature);
   } catch (error) {
@@ -30598,4 +30576,4 @@ function displayResponse(text, response) {
   }
 }
 },{"regenerator-runtime/runtime":"KA2S","ethers":"iS6H","ethers/lib/utils":"if8b"}]},{},["Focm"], null)
-//# sourceMappingURL=/game-web3wallet/game-web3wallet.ab23ec8c.js.map
+//# sourceMappingURL=/game-web3wallet/game-web3wallet.c3497a41.js.map
