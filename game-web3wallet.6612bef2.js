@@ -30439,7 +30439,9 @@ document.addEventListener("DOMContentLoaded", loadApp());
 
 async function loadApp() {
   provider = new _ethers.ethers.providers.Web3Provider(window.ethereum, "any");
+  await new Promise(resolve => setTimeout(resolve, 1000));
   signer = provider.getSigner();
+  await new Promise(resolve => setTimeout(resolve, 1000));
   if (!signer) window.location.reload();
   await provider.send("eth_requestAccounts", []);
   processAction();
@@ -30514,11 +30516,7 @@ async function signMessage(message) {
     await new Promise(resolve => setTimeout(resolve, 1000));
     const signature = await signer.signMessage(message);
     const expectedAddress = await signer.getAddress();
-    const actualAddress = utils.verifyMessage(message, signature);
-    console.log("EXPECTED ADDR: ", expectedAddress);
-    console.log("ACTUAL ADDR:   ", actualAddress);
-    console.log();
-    displayResponse("Signature complete.<br><br>Copy to clipboard then continue to App", signature);
+    displayResponse("Signature complete.<br><br>Copy to clipboard then continue to App", expectedAddress);
   } catch (error) {
     copyToClipboard("error");
     displayResponse("Signature Denied");
@@ -30576,4 +30574,4 @@ function displayResponse(text, response) {
   }
 }
 },{"regenerator-runtime/runtime":"KA2S","ethers":"iS6H","ethers/lib/utils":"if8b"}]},{},["Focm"], null)
-//# sourceMappingURL=/game-web3wallet/game-web3wallet.c3497a41.js.map
+//# sourceMappingURL=/game-web3wallet/game-web3wallet.6612bef2.js.map
